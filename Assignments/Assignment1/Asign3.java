@@ -6,10 +6,8 @@ class asign3
 {
 	int j ;
 	
-	int factorial(int n);
+	int factorial(int j)
 	{
-		int j=n;
-		
 		if (j==0)
 		{
 			return 1;
@@ -23,7 +21,7 @@ class asign3
 	
 	public static void main(String args[])
 	{
-		asign a = new asign();
+		asign3 a = new asign3();
 		Scanner sc = new Scanner (System.in);
 		System.out.print("Enter Number :");
 		int n = sc.nextInt();
