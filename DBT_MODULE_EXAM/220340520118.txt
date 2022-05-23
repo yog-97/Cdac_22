@@ -1,0 +1,144 @@
+Name :- Yogesh Dhananjay Naik
+Center :- JUHU
+Roll No :- 220340520118
+===================================================================================
+SECTION - 1
+----------------------------------------------------------------------------------
+Q 1.
+
+Create table DEPT(   
+DEPTNO int(2),
+DNAME varchar(15),
+LOC varchar(10)
+);
+
+INSERT INTO DEPT (DEPTNO, DNAME, LOC)  
+VALUES
+(10, 'ACCOUNTING', 'NEW YORK'),
+(20, 'RESEARCH', 'DALLAS'),
+(30, 'SALES', 'CHICAGO'),
+(40, 'OPERATIONS', 'BOSTON');
+
+
+----------------------------------------------------------------------------------
+
+Q2.
+
+Create table EMP(  
+EMPNO int(4),
+ENAME varchar(10),
+JOB varchar(9),
+HIREDATE date,
+SAL float(7,2),
+COMM float(7,2),
+DEPTNO int(2)
+);
+SELECT * FROM EMP;
+
+Insert INTO EMP (EMPNO, ENAME, JOB, HIREDATE, SAL, COMM, DEPTNO)
+VALUES
+(7839, 'KING', 'MANAGER', '1991-11-17', 5000, NULL, 10),
+(7698, 'BLAKE', 'CLERK', '1981-05-01', 2850, NULL, 30),
+(7782, 'CLARK', 'MANAGER', '1981-06-09', 2450, NULL, 10),
+(7566, 'JONES', 'CLERK', '1981-04-02', 2975, NULL, 20),
+(7654, 'MARTIN', 'SALESMAN', '1981-09-28', 1250, 1400, 30),
+(7499, 'ALLEN', 'SALESMAN', '1981-02-20', 1600, 300, 30);
+
+
+----------------------------------------------------------------------------------
+
+Q3.
+
+SELECT ENAME FROM EMP               
+WHERE SAL BETWEEN 2500 AND 5000;
+
+----------------------------------------------------------------------------------
+
+Q4
+
+SELECT ENAME FROM EMP  
+ORDER BY ENAME DESC;
+
+----------------------------------------------------------------------------------
+
+Q5
+
+SELECT lower(JOB) "JOB" FROM EMP; 
+
+----------------------------------------------------------------------------------
+
+Q6
+
+SELECT ENAME, length(ENAME)"LENGTH" FROM EMP; 
+
+----------------------------------------------------------------------------------
+
+Q7
+
+SELECT DEPTNO, COUNT(ENAME) FROM EMP  
+GROUP BY DEPTNO;
+
+----------------------------------------------------------------------------------
+
+Q8
+
+SELECT DNAME, ENAME FROM EMP, DEPT   
+WHERE EMP.DEPTNO = DEPT.DEPTNO;
+----------------------------------------------------------------------------------
+
+Q9
+
+SELECT position("AR" IN ENAME) FROM EMP; 
+
+----------------------------------------------------------------------------------
+
+Q10
+
+
+SELECT ENAME, SAL*0.20 "HRA" FROM EMP;  
+
+=================================================================================
+
+SECTION - 2
+
+----------------------------------------------------------------------------------
+Q1.
+
+CREATE TABLE TEMP1(OUTPUT VARCHAR(20));
+DELIMITER //
+CREATE procedure PROC1(X VARCHAR(20), Y VARCHAR(20))   -- SECTION-2 - Q1
+BEGIN
+	IF instr(X,Y)>0 OR INSTR(Y,X) THEN
+		insert INTO TEMP1 VALUES ('EXIST');
+    else
+		insert INTO TEMP1 VALUES('NOT EXIST');
+		END IF;
+END; //
+DELIMITER ;
+
+CALL PROC1('DAC','CDAC');
+
+SELECT * FROM TEMP1;
+
+
+-----------------------------------------------------------------------------------
+
+Q2
+
+DELIMITER //
+CREATE FUNCTION FUNCT1(A INT, B INT, C INT)   -- SECTION-2 - Q2
+RETURNS BOOLEAN DETERMINISTIC
+BEGIN
+	IF (A+B>C) AND(B+C>A) AND (A+C>B) THEN
+		insert INTO TEMP VALUES ('VALID');
+    RETURN TRUE;
+    else
+		insert INTO TEMP VALUES('INVALID');
+        RETURN FALSE;
+		END IF;
+END; //
+DELIMITER ;
+
+SELECT FUNCT1(1,1,100) FROM DUAL;
+SELECT FUNCT1(5,4,6) FROM DUAL;
+
